@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "P38Pawn.h"
@@ -120,8 +120,13 @@ void AP38Pawn::PitchRoll(const FInputActionValue& Value)
 	AddActorLocalRotation(DesireRotation * 60.0f * UGameplayStatics::GetWorldDeltaSeconds(GetWorld()));
 }
 
-void AP38Pawn::PostSpawn_Implementation()
+void AP38Pawn::PostSpawn_Implementation(void)
 {
-	UE_LOG(LogTemp, Warning, TEXT("�̰� CPP"));
+	UE_LOG(LogTemp, Warning, TEXT("이건 CPP"));
+}
+
+void AP38Pawn::BlueprintCall()
+{
+	UE_LOG(LogTemp, Warning, TEXT("이건 블루 프린트에서 실행"));
 }
 

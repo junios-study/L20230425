@@ -73,7 +73,14 @@ public:
 	//UFUNCTION(BlueprintImplementableEvent, Category = "Custom Spawn")
 	UFUNCTION(BlueprintNativeEvent, Category = "Custom Spawn")
 	void PostSpawn();
-	void PostSpawn_Implementation(void);
+	void PostSpawn_Implementation();
+
+	//UFUNCTION(Server)
+	//void ServerExecute();
+	//void ServerExecute_Implementation();
+
+	UFUNCTION(BlueprintCallable, Category = "User Function")
+	void BlueprintCall();
 
 
 	void Fire(const FInputActionValue& Value);
