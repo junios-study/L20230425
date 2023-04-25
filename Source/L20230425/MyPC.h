@@ -15,7 +15,7 @@ class L20230425_API AMyPC : public APlayerController
 	GENERATED_BODY()
 public:
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	class UInputMappingContext* InputContext;
 	
 	virtual void BeginPlay() override;

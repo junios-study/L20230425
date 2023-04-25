@@ -10,6 +10,9 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/BoxComponent.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AP38Pawn::AP38Pawn()
@@ -81,5 +84,32 @@ void AP38Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+	if (EnhancedInputComponent)
+	{
+		if (FireAction)
+		{
+			EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AP38Pawn::Fire);
+		}
+		if (PitchRollAction)
+		{
+			EnhancedInputComponent->BindAction(PitchRollAction, ETriggerEvent::Triggered, this, &AP38Pawn::PitchRoll);
+		}
+	}
+
+}
+
+void AP38Pawn::Fire(const FInputActionValue& Value)
+{
+}
+
+void AP38Pawn::PitchRoll(const FInputActionValue& Value)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("PitchRoll"));
+
+	FVector2D Values = Value.Get<FVector2D>();
+	FRotator DesireRotation(Values.Y, 0, Values.X);
+
+	AddActorLocalRotation(DesireRotation * 60.0f * UGameplayStatics::GetWorldDeltaSeconds(GetWorld()));
 }
 

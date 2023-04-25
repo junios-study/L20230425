@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
+#include "InputAction.h"
+
 #include "P38Pawn.generated.h"
 
 
@@ -59,4 +62,15 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UFloatingPawnMovement* Movement;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	class UInputAction* FireAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	class UInputAction* PitchRollAction;
+
+
+	void Fire(const FInputActionValue& Value);
+
+	void PitchRoll(const FInputActionValue& Value);
 };
