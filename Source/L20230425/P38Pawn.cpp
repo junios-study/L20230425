@@ -13,6 +13,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Kismet/GameplayStatics.h"
+#include "Rocket.h"
 
 // Sets default values
 AP38Pawn::AP38Pawn()
@@ -101,6 +102,12 @@ void AP38Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AP38Pawn::Fire(const FInputActionValue& Value)
 {
+	if (Projectile)
+	{
+		GetWorld()->SpawnActor<ARocket>(Projectile, Arrow->GetComponentLocation(), Arrow->GetComponentRotation());
+	}
+
+	PostSpawn();
 }
 
 void AP38Pawn::PitchRoll(const FInputActionValue& Value)
@@ -111,5 +118,10 @@ void AP38Pawn::PitchRoll(const FInputActionValue& Value)
 	FRotator DesireRotation(Values.Y, 0, Values.X);
 
 	AddActorLocalRotation(DesireRotation * 60.0f * UGameplayStatics::GetWorldDeltaSeconds(GetWorld()));
+}
+
+void AP38Pawn::PostSpawn_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ÀÌ°Ç CPP"));
 }
 

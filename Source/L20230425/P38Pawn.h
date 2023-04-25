@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 
-#include "InputAction.h"
+//#include "InputAction.h"
 
 #include "P38Pawn.generated.h"
 
@@ -17,6 +17,7 @@ class UCameraComponent;
 class UBoxComponent;
 class UFloatingPawnMovement;
 class UStaticMeshComponent;
+struct FInputActionValue;
 
 
 UCLASS()
@@ -69,8 +70,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	class UInputAction* PitchRollAction;
 
+	//UFUNCTION(BlueprintImplementableEvent, Category = "Custom Spawn")
+	UFUNCTION(BlueprintNativeEvent, Category = "Custom Spawn")
+	void PostSpawn();
+	void PostSpawn_Implementation(void);
+
 
 	void Fire(const FInputActionValue& Value);
 
 	void PitchRoll(const FInputActionValue& Value);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
+	TSubclassOf<class ARocket> Projectile;
 };
