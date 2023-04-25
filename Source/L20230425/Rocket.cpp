@@ -27,6 +27,9 @@ ARocket::ARocket()
 	}
 
 	Movement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Movement"));
+	Movement->InitialSpeed = 2000.0f;
+	Movement->MaxSpeed = 2000.0f;
+	Movement->ProjectileGravityScale = 0.0f;
 
 }
 
